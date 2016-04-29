@@ -7,7 +7,7 @@ stan_in <- function(infile){
   y <- infile$log_SR_ratio
   n <- length(y)
   study <- as.numeric(infile$Study_nr)
-  duration <- infile$mn_duration
+  duration <- infile$Duration
   
   n_study <- max(study)
 

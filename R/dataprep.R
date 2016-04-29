@@ -20,5 +20,5 @@ for(j in 1:k){
 # Calculate average duration at study level
 dta_duration <- dta_SR %>%
   group_by(Study) %>%
-  summarize(mn_duration = mean(Year2_min - Year1_min)) %>%
+  summarize(mn_duration = mean(Duration)) %>%
   left_join(dta_SR, .)
