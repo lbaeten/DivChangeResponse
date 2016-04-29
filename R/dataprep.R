@@ -17,6 +17,10 @@ for(j in 1:k){
   dta_SR$Study_nr[dta_SR$Study == study_ID[j]] <- j
 }
 
+# Original versus updated data
+dta_SR_orig <- dta_SR %>% filter(Round == 1)
+dta_SR_upd <- dta_SR %>% filter(Round == 2)
+
 # Calculate average duration at study level
 dta_duration <- dta_SR %>%
   group_by(Study) %>%

@@ -1,8 +1,10 @@
 data {
   int<lower=0> n;
   int<lower=0> n_study;
+  int<lower=0> n_pred;
   int<lower=1,upper=n_study> study[n];
   vector[n] duration;
+  vector[n_pred] new_duration;
   vector[n] y;
 } 
 parameters {
@@ -27,8 +29,13 @@ model {
   a ~ normal(mu_a, sigma_a);
   
   mu_b ~ normal(0, 1);
-  b ~ normal(0.1 * mu_b, sigma_b);
+  b ~ normal(mu_b, sigma_b);
 
   // likelihood
   y ~ normal(y_hat, sigma);
+}
+generated quantities {
+  vector[n_pred] y_pred;
+
+  y_pred <- mu_a + new_duration * mu_b;
 }
