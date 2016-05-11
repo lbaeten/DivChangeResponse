@@ -4,25 +4,41 @@
 
 library(dplyr)
 
-# Read data
-dta <- read.csv("data/sd01.csv", header=T)
-dta_SR <- tbl_df(dta) %>% filter(SR_analysis == 1)
+# Read data and filter data
+vel_orig <- read.csv("data/Vellend_data_original.csv", header=T) %>%
+  tbl_df() %>% 
+  filter(SR_analysis == 1)
+
+vel_upd <- read.csv("data/Vellend_data_updated.csv", header=T) %>%
+  tbl_df() %>%
+  filter(SR_analysis == 1)
 
 # Calculate study indicators
-n <- nrow(dta_SR)
-dta_SR$Study_nr <- rep(NA,n)
-study_ID <- unique(dta_SR$Study)
+n <- nrow(vel_orig)
+vel_orig$Study_nr <- rep(NA,n)
+study_ID <- unique(vel_orig$Study)
 k <- length(study_ID)
 for(j in 1:k){
-  dta_SR$Study_nr[dta_SR$Study == study_ID[j]] <- j
+  vel_orig$Study_nr[vel_orig$Study == study_ID[j]] <- j
 }
 
-# Original versus updated data
-dta_SR_orig <- dta_SR %>% filter(Round == 1)
-dta_SR_upd <- dta_SR %>% filter(Round == 2)
+n <- nrow(vel_upd)
+vel_upd$Study_nr <- rep(NA,n)
+study_ID <- unique(vel_upd$Study)
+k <- length(study_ID)
+for(j in 1:k){
+  vel_upd$Study_nr[vel_upd$Study == study_ID[j]] <- j
+}
+
+rm(list = c("j", "k", "n", "study_ID"))
 
 # Calculate average duration at study level
-dta_duration <- dta_SR %>%
+vel_orig <- vel_orig %>%
   group_by(Study) %>%
   summarize(mn_duration = mean(Duration)) %>%
-  left_join(dta_SR, .)
+  left_join(vel_orig, .)
+
+vel_upd <- vel_upd %>%
+  group_by(Study) %>%
+  summarize(mn_duration = mean(Duration)) %>%
+  left_join(vel_upd, .)
