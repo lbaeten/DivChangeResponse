@@ -15,7 +15,7 @@ parameters {
   real<lower=0> sigma;
   real<lower=0> sigma_a;
   real<lower=0> sigma_b;
-} 
+}
 transformed parameters {
   vector[n] y_hat;
   
@@ -35,7 +35,11 @@ model {
   y ~ normal(y_hat, sigma);
 }
 generated quantities {
-  vector[n_pred] y_pred;
-
-  y_pred <- mu_a + new_duration * mu_b;
+  real a_tilde;
+  real b_tilde
+  real y_tilde;
+  
+  a_tilde <- normal_rng(mu_a, sigma_a);
+  b_tilde <- normal_rng(mu_b, sigma_b);
+  y_tilde <- normal_rng(a_tilde + b_tilde * new_duration[n], sigma_y);
 }
