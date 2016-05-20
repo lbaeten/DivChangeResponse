@@ -2,6 +2,7 @@
 Analysis of the updated data from Vellend et al 2013 PNAS.
 
 *version 30 april 2016*
+NEEDS UPDATE
 
 This repo contains two folders, one with the data and one with R code
 
