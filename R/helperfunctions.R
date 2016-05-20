@@ -2,8 +2,23 @@
 # Some helperfunctions
 #========================
 
-# Data input function
-stan_in <- function(infile){
+# Data input functions
+
+  # // data input for Dornelas analyses
+stan_in_dorn <- function(infile, y_variable, duration_variable){
+  y <- infile[,y_variable]
+  n <- length(y)
+
+  duration <- infile[,duration_variable]
+
+  new_duration <- seq(from=min(duration), to=max(duration), by=1)
+  n_pred <- length(new_duration)
+
+  list(n=n, n_pred=n_pred, y=y, duration=duration, new_duration=new_duration)
+}
+
+  # // data input for Vellend analyses
+stan_in_vel <- function(infile){
   y <- infile$log_SR_ratio
   n <- length(y)
   study <- as.numeric(infile$Study_nr)
