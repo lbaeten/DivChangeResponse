@@ -4,6 +4,18 @@
 
 library(dplyr)
 
+# Dornelas data
+#==============
+
+dorn_raw <- read.csv("data/Dornelas_by_study.csv") %>%
+  filter(modified_study_147 == "no")
+  
+dorn_modif <-  read.csv("data/Dornelas_by_study.csv") %>%
+  filter(modified_study_147 == "yes")
+
+# Vellend data
+#=============
+
 # Read data and filter data
 vel_orig <- read.csv("data/Vellend_data_original.csv", header=T) %>%
   tbl_df() %>% 
