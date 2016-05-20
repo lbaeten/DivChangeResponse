@@ -11,26 +11,22 @@ source("R/helperfunctions.R")
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
+
+####################################################################
+# here you can switch between the Vellend 1.0 data (vel_orig) 
+# or Vellend 2.0 data (vel_upd)
+dataset <- vel_orig
+#dataset <- vel_upd
+#
+stan_dta <- stan_in_vel(dataset)
+#
+####################################################################
+
+
 # Construct the Stan models
 #--------------------------
 stan_mod_rintslope <- stan_model("R/model_duration_rintslope.stan")
 stan_mod_rslope <- stan_model("R/model_duration_rslope.stan")
-
-  # here you can switch between the Vellend 1.0 data (vel_orig) 
-  # or Vellend 2.0 data (vel_upd)
-#====================
-dataset <- vel_orig
-#dataset <- vel_upd
-#====================
-
-  # here you can choose whether you want graphs for the
-  # intercept+slope model or the random slope only model
-#====================
-select_model <- stan_fit_rintslope
-#select_model <- stan_fit_rslope
-#====================
-
-stan_dta <- stan_in(dataset)
 
 # Sampling
 #-------------------------
@@ -51,11 +47,19 @@ stan_pre <- stan_lmer(log_SR_ratio ~ 1 + Duration + (1 + Duration | Study), data
                       chains = 2, iter = 1000)
 print(stan_pre, pars = "Duration", digits = 3)
 
-# Credible/prediction intervals and graphs
-#-----------------------------------------
 
+####################################################################
+# choose the model for which to draw the graphs
+select_model <- stan_fit_rintslope
+#select_model <- stan_fit_rslope
+####################################################################
+
+
+# extract credible/prediction intervals
 stan_cre <- stan_extract_cre(select_model, stan_dta)
+stan_pre <- stan_extract_pre(select_model, stan_dta)
 
+# graphs
 ggplot(dataset, aes(Duration, log_SR_ratio)) + 
   geom_point() +
   geom_hline(aes(yintercept = 0)) +
@@ -67,9 +71,6 @@ ggplot(dataset, aes(Duration, log_SR_ratio)) +
   theme_bw(base_size=17) +
   annotate(geom="text", x=0.25, y=1.35, label="a)") +
   xlim(c(0,275))
-
-
-stan_pre <- stan_extract_pre(select_model, stan_dta)
 
 ggplot(dataset, aes(Duration, log_SR_ratio)) + 
   geom_point() +
