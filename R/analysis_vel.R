@@ -91,42 +91,42 @@ names(vel_updstan_pre_rslope) <- c("Duration", "log_SR_ratio", "plo", "phi")
 vel_origstan_cre_rintslopePlot <- ggplot(vel_origdataset, aes(Duration, log_SR_ratio)) + 
   geom_point() +
   geom_hline(aes(yintercept = 0)) +
-  geom_line(data = vel_origstan_cre_rintslope, aes(x = Duration, y = log_SR_ratio), size = 1.2, colour = "blue") +
-  geom_abline(slope = -0.00365, intercept = 0.1118, size = 1.2, linetype = 3, colour = "blue") +
+  geom_line(data = vel_origstan_cre_rintslope, aes(x = Duration, y = log_SR_ratio), size = 1, colour = "blue") +
+  geom_abline(slope = -0.00365, intercept = 0.1118, size = 1, linetype = 3, colour = "blue") +
   geom_ribbon(data = vel_origstan_cre_rintslope, aes(x = Duration, ymin = plo, ymax = phi), alpha = 0.3, fill = "blue") +
   xlim(0, 300) +
   ylim(-2.5, 2.5) +
   xlab(NULL) +
   ylab(NULL) +
-  theme_bw(base_size=15) +
-  annotate(geom="text", x=105, y=2.4, label="a) Original dataset - with intercept", size = 5)
+  theme_bw(base_size=12) +
+  annotate(geom="text", x=140, y=2.4, label="a) Original dataset - with intercept", size = 4)
 
 vel_origstan_cre_rslopePlot <- ggplot(vel_origdataset, aes(Duration, log_SR_ratio)) + 
   geom_point() +
   geom_hline(aes(yintercept = 0)) +
-  geom_line(data = vel_origstan_cre_rslope, aes(x = Duration, y = log_SR_ratio), size = 1.2, colour = "blue") +
-  geom_abline(slope = 0.00112, intercept = 0, size = 1.2, linetype = 3, colour = "blue") +
+  geom_line(data = vel_origstan_cre_rslope, aes(x = Duration, y = log_SR_ratio), size = 1, colour = "blue") +
+  geom_abline(slope = 0.00112, intercept = 0, size = 1, linetype = 3, colour = "blue") +
   geom_ribbon(data = vel_origstan_cre_rslope, aes(x = Duration, ymin = plo, ymax = phi), alpha = 0.3, fill = "blue") +
   xlim(0, 300) +
   ylim(-2.5, 2.5) +
   xlab(NULL) +
   ylab(NULL) +
-  theme_bw(base_size=15) +
-  annotate(geom="text", x=105, y=2.4, label="b) Original dataset - intercept = 0", size = 5)
+  theme_bw(base_size=12) +
+  annotate(geom="text", x=140, y=2.4, label="b) Original dataset - intercept = 0", size = 4)
 
 vel_updstan_cre_rintslopePlot <- ggplot(vel_upddataset, aes(Duration, log_SR_ratio)) + 
   geom_point(colour = "red") +
   geom_point(data = vel_origdataset, aes(Duration, log_SR_ratio), colour = "black") +
   geom_hline(aes(yintercept = 0)) +
-  geom_line(data = vel_updstan_cre_rintslope, aes(x = Duration, y = log_SR_ratio), size = 1.2, colour = "blue") +
-  geom_abline(slope = -0.00255, intercept = 0.0935, size = 1.2, linetype = 3, colour = "blue") +
+  geom_line(data = vel_updstan_cre_rintslope, aes(x = Duration, y = log_SR_ratio), size = 1, colour = "blue") +
+  geom_abline(slope = -0.00255, intercept = 0.0935, size = 1, linetype = 3, colour = "blue") +
   geom_ribbon(data = vel_updstan_cre_rintslope, aes(x = Duration, ymin = plo, ymax = phi), alpha = 0.3, fill = "blue") +
   xlim(0, 300) +
   ylim(-2.5, 2.5) +
   xlab(NULL) +
   ylab(NULL) +
-  theme_bw(base_size=15) +
-  annotate(geom="text", x=105, y=2.4, label="c) Updated dataset - with intercept", size = 5)
+  theme_bw(base_size=12) +
+  annotate(geom="text", x=140, y=2.4, label="c) Updated dataset - with intercept", size = 4)
 
 cols <- c("original"="black", "updated"="red")
 
@@ -135,19 +135,21 @@ vel_updstan_cre_rslopePlot <- ggplot(vel_upddataset, aes(Duration, log_SR_ratio)
   geom_point(aes(colour = "Vellend et al. updated")) +
   geom_point(data = vel_origdataset, aes(Duration, log_SR_ratio, colour = "Vellend et al. 2013")) +
   geom_hline(aes(yintercept = 0)) +
-  geom_line(data = vel_updstan_cre_rslope, aes(x = Duration, y = log_SR_ratio), size = 1.2, colour = "blue") +
-  geom_abline(slope = 0.00135, intercept = 0, size = 1.2, linetype = 3, colour = "blue") +
+  geom_line(data = vel_updstan_cre_rslope, aes(x = Duration, y = log_SR_ratio), size = 1, colour = "blue") +
+  geom_abline(slope = 0.00135, intercept = 0, size = 1, linetype = 3, colour = "blue") +
   geom_ribbon(data = vel_updstan_cre_rslope, aes(x = Duration, ymin = plo, ymax = phi), alpha = 0.3, fill = "blue") +
   xlim(0, 300) +
   ylim(-2.5, 2.5) +
   xlab(NULL) +
   ylab(NULL) +
-  theme_bw(base_size=15) +
-  theme(legend.justification=c(1,0), legend.position=c(1,0), legend.key = element_blank(),legend.text=element_text(size=15),legend.title=element_text(size=15)) +
-  annotate(geom="text", x=105, y=2.4, label="d) Updated dataset - intercept = 0", size = 5)
+  theme_bw(base_size=12) +
+  theme(legend.justification=c(1,0), legend.position=c(1,0), legend.key = element_blank(),legend.text=element_text(size=12),legend.title=element_text(size=12)) +
+  annotate(geom="text", x=140, y=2.4, label="d) Updated dataset - intercept = 0", size = 4)
 
 library(gridExtra)
 library(grid)
 png(file="velPlots.png", width=800, height=800)
-grid.arrange(vel_origstan_cre_rintslopePlot, vel_origstan_cre_rslopePlot, vel_updstan_cre_rintslopePlot, vel_updstan_cre_rslopePlot, ncol=2, nrow=2, bottom = textGrob("Study Duration (years)\n", gp=gpar(fontsize=20)), left = textGrob(expression(paste("\nEffect size (ln(",S[2]/S[1],"))")), gp=gpar(fontsize=20), rot = 90))
+
+pdf(file="figures/velPlots.pdf")
+grid.arrange(vel_origstan_cre_rintslopePlot, vel_origstan_cre_rslopePlot, vel_updstan_cre_rintslopePlot, vel_updstan_cre_rslopePlot, ncol=2, nrow=2, bottom = textGrob("Study Duration (years)\n", gp=gpar(fontsize=12)), left = textGrob(expression(paste("\nEffect size (ln(",S[2]/S[1],"))")), gp=gpar(fontsize=12), rot = 90))
 dev.off()
