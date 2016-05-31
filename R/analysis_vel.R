@@ -148,8 +148,6 @@ vel_updstan_cre_rslopePlot <- ggplot(vel_upddataset, aes(Duration, log_SR_ratio)
 
 library(gridExtra)
 library(grid)
-png(file="velPlots.png", width=800, height=800)
-
 pdf(file="figures/velPlots.pdf")
 grid.arrange(vel_origstan_cre_rintslopePlot, vel_origstan_cre_rslopePlot, vel_updstan_cre_rintslopePlot, vel_updstan_cre_rslopePlot, ncol=2, nrow=2, bottom = textGrob("Study Duration (years)\n", gp=gpar(fontsize=12)), left = textGrob(expression(paste("\nEffect size (ln(",S[2]/S[1],"))")), gp=gpar(fontsize=12), rot = 90))
 dev.off()
