@@ -8,7 +8,7 @@ library(ggplot2)
 source("R/dataprep.R")
 
 # Dornelas data
-#==============
+#---------------
 
 # Linear regression model
 gonz_fit_dor <- lm(log_ratio ~ duration_lr, data = dorn_raw)
@@ -22,7 +22,7 @@ pvar <- diag(matrix %*% tcrossprod(vcov(gonz_fit_dor),matrix))  #this adds the v
 pred <- data.frame(pred, plo=pred$log_ratio - 2*sqrt(pvar), phi=pred$log_ratio+2*sqrt(pvar))
 
 # Plot the results
-gonzPlot <- qplot(duration_lr, log_ratio, data=dorn_raw, size=I(2)) +
+gonzPlot_dorn <- qplot(duration_lr, log_ratio, data=dorn_raw, size=I(2)) +
   geom_abline(intercept=0, slope=0, 
               lwd=1, color="black") +
   geom_abline(intercept=coef(gonz_fit_dor)[1], slope=coef(gonz_fit_dor)[2], 
@@ -34,11 +34,11 @@ gonzPlot <- qplot(duration_lr, log_ratio, data=dorn_raw, size=I(2)) +
   annotate(geom="text", x=0.25, y=1.35, label="a)") +
   xlim(c(0,90))+
   ggtitle("Dornelas et al.")
-gonzPlot
+gonzPlot_dorn
 
 
 # Vellend data
-#=============
+#----------------
 
 #Linear mixed model with random slopes
 gonz_fit_vel <- lmer(log_SR_ratio ~ Duration + (1+Duration|Study), data=vel_orig, REML=T)
@@ -52,7 +52,7 @@ pvar <- diag(matrix %*% tcrossprod(vcov(gonz_fit_vel),matrix))  #this adds the v
 pred <- data.frame(pred, plo=pred$log_SR_ratio - 2*sqrt(pvar), phi=pred$log_SR_ratio+2*sqrt(pvar))
 
 # Plot the results
-gonzPlot <- qplot(Duration, log_SR_ratio, data=vel_orig, size=I(2)) +
+gonzPlot_vel <- qplot(Duration, log_SR_ratio, data=vel_orig, size=I(2)) +
   geom_abline(intercept=0, slope=0, 
               lwd=1, color="black") +
   geom_abline(intercept=fixef(gonz_fit_vel)[1], slope=fixef(gonz_fit_vel)[2], 
@@ -64,6 +64,5 @@ gonzPlot <- qplot(Duration, log_SR_ratio, data=vel_orig, size=I(2)) +
   annotate(geom="text", x=0.25, y=1.35, label="a)") +
   xlim(c(0,275))+
   ggtitle("Vellend et al.")
-
-gonzPlot
+gonzPlot_vel
 
