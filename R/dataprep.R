@@ -5,8 +5,7 @@
 library(dplyr)
 
 # Dornelas data
-#==============
-
+#--------------
 dorn_raw <- read.csv("data/Dornelas_by_study.csv") %>%
   filter(modified_study_147 == "no")
   
@@ -14,9 +13,8 @@ dorn_modif <-  read.csv("data/Dornelas_by_study.csv") %>%
   filter(modified_study_147 == "yes")
 
 # Vellend data
-#=============
-
-# Read data and filter data
+#-------------
+  # Read data and filter data
 vel_orig <- read.csv("data/Vellend_data_original.csv", header=T) %>%
   tbl_df() %>% 
   filter(SR_analysis == 1)
@@ -25,7 +23,7 @@ vel_upd <- read.csv("data/Vellend_data_updated.csv", header=T) %>%
   tbl_df() %>%
   filter(SR_analysis == 1)
 
-# Calculate study indicators
+  # Calculate study indicators
 n <- nrow(vel_orig)
 vel_orig$Study_nr <- rep(NA,n)
 study_ID <- unique(vel_orig$Study)
@@ -43,14 +41,3 @@ for(j in 1:k){
 }
 
 rm(list = c("j", "k", "n", "study_ID"))
-
-# Calculate average duration at study level
-vel_orig <- vel_orig %>%
-  group_by(Study) %>%
-  summarize(mn_duration = mean(Duration)) %>%
-  left_join(vel_orig, .)
-
-vel_upd <- vel_upd %>%
-  group_by(Study) %>%
-  summarize(mn_duration = mean(Duration)) %>%
-  left_join(vel_upd, .)
