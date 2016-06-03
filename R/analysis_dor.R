@@ -3,7 +3,7 @@
 #========================
 
 library(rstan)
-library(rstanarm)
+library(ggplot2)
 library(gridExtra)
 library(grid)
 source("R/dataprep.R")
@@ -11,7 +11,6 @@ source("R/helperfunctions.R")
 
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
-
 
 # Log ratios
 standat_dornraw_logr <- stan_in_dorn(dorn_raw, "log_ratio", "duration_lr")
@@ -164,7 +163,6 @@ plot_logr_dornmodif_slope <- ggplot(dorn_modif, aes(duration_lr, log_ratio)) +
   ylab(NULL) +
   theme_bw(base_size=12) +
   annotate(geom="text", x=50, y=4.8, label="f) Modified dataset (log ratios) - intercept = 0", size = 3)
-
 
 grid.arrange(plot_slope_dornraw_intslope, plot_slope_dornraw_slope, 
              plot_logr_dornraw_intslope, plot_logr_dornraw_slope, 
