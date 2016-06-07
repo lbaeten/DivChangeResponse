@@ -20,12 +20,6 @@ model {
 }
 generated quantities {
   vector[n_pred] y_cre;
-  vector[n_pred] y_pre;
-  
-  // credible interval
+
   y_cre <- new_duration * b;
-  
-  // prediction interval
-  for(i in 1:n_pred)
-    y_pre[i] <- normal_rng(new_duration[i] * b, sigma);
 }

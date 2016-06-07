@@ -29,16 +29,7 @@ model {
   y ~ normal(y_hat, sigma);
 }
 generated quantities {
-  real b_tilde;
   vector[n_pred] y_cre;
-  vector[n_pred] y_pre;
 
-  // credible intervals
   y_cre <- mu_b * new_duration;
-
-  // prediction intervals
-  b_tilde <- normal_rng(mu_b, sigma_b);
-
-  for(i in 1:n_pred)
-    y_pre[i] <- normal_rng(b_tilde * new_duration[i], sigma);
 }
