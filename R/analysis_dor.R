@@ -4,6 +4,7 @@
 
 library(rstan)
 library(ggplot2)
+library(ggmcmc)
 library(gridExtra)
 library(grid)
 source("R/dataprep.R")
@@ -51,6 +52,13 @@ print(stanfit_slope_dornraw_intslope, pars = c("a","b","sigma"), digits = 4)
       # slope model
 stanfit_slope_dornraw_slope <- stan_sampling(stanmod_slope, standat_dornraw_slope)
 print(stanfit_slope_dornraw_slope, pars = c("b", "sigma"), digits = 4)
+
+# checking model conversion
+#---------------------------
+select_model <- stanfit_logr_dornraw_intslope      # select one of the previous models
+
+ggs_traceplot(ggs(select_model, family = "b"))     # example for slope
+ggs_compare_partial(ggs(select_model, family = "b"))
 
 # extract credible intervals
 #---------------------------

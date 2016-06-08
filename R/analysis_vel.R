@@ -4,6 +4,7 @@
 
 library(rstan)
 library(ggplot2)
+library(ggmcmc)
 library(gridExtra)
 library(grid)
 source("R/dataprep.R")
@@ -37,6 +38,13 @@ print(stanfit_velupd_rintslope, pars = c("mu_a","mu_b", "sigma_a","sigma_b", "si
     # random slopes model
 stanfit_velupd_rslope <- stan_sampling(stanmod_rslope, standat_velupd)
 print(stanfit_velupd_rslope, pars = c("mu_b","sigma_b", "sigma"), digits = 4)
+
+# checking model conversion
+#---------------------------
+select_model <- stanfit_velorig_rintslope     # select one of the previous models
+
+ggs_traceplot(ggs(select_model, family = "mu"))     # example for intercept and slope
+ggs_compare_partial(ggs(select_model, family = "mu"))
 
 # extract credible intervals
 #---------------------------
