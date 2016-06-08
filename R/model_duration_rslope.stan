@@ -22,7 +22,10 @@ transformed parameters {
 }
 model {
   mu_b ~ normal(0, 1);
+  sigma_b ~ cauchy(0,5);
   b ~ normal(mu_b, sigma_b);
+
+  sigma ~ cauchy(0,5);
 
   y ~ normal(y_hat, sigma);
 }

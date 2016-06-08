@@ -16,6 +16,9 @@ transformed parameters {
     y_hat[i] <- duration[i] * b;
 }
 model {
+  b ~ normal(0,10);
+  sigma ~ cauchy(0,5);
+  
   y ~ normal(y_hat, sigma);
 }
 generated quantities {
