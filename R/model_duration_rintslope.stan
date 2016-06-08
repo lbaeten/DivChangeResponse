@@ -24,14 +24,12 @@ transformed parameters {
     y_hat[i] <- a[study[i]] + duration[i] * b[study[i]];
 }
 model {
-  //priors
   mu_a ~ normal(0, 1);
   a ~ normal(mu_a, sigma_a);
   
   mu_b ~ normal(0, 1);
   b ~ normal(mu_b, sigma_b);
 
-  // likelihood
   y ~ normal(y_hat, sigma);
 }
 generated quantities {
