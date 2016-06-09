@@ -53,12 +53,31 @@ print(stanfit_slope_dornraw_intslope, pars = c("a","b","sigma"), digits = 4)
 stanfit_slope_dornraw_slope <- stan_sampling(stanmod_slope, standat_dornraw_slope)
 print(stanfit_slope_dornraw_slope, pars = c("b", "sigma"), digits = 4)
 
-# checking model conversion
-#---------------------------
-select_model <- stanfit_logr_dornraw_intslope      # select one of the previous models
+# checking conversion and model fit
+#----------------------------------
+ggs_traceplot(ggs(stanfit_logr_dornraw_intslope) %>% filter(Parameter %in% c("a","b")))
+y_fit <- apply(rstan::extract(stanfit_logr_dornraw_intslope)$"y_hat", 2, quantile, probs = .5)
+plot(y_fit, standat_dornraw_logr$y); abline(a=0,b=1)
 
-ggs_traceplot(ggs(select_model, family = "b"))     # example for slope
-ggs_compare_partial(ggs(select_model, family = "b"))
+ggs_traceplot(ggs(stanfit_logr_dornraw_slope) %>% filter(Parameter == "b"))
+y_fit <- apply(rstan::extract(stanfit_logr_dornraw_slope)$"y_hat", 2, quantile, probs = .5)
+plot(y_fit, standat_dornraw_logr$y); abline(a=0,b=1)
+
+ggs_traceplot(ggs(stanfit_logr_dornmodif_intslope) %>% filter(Parameter %in% c("a","b")))
+y_fit <- apply(rstan::extract(stanfit_logr_dornmodif_intslope)$"y_hat", 2, quantile, probs = .5)
+plot(y_fit, standat_dornmodif_logr$y); abline(a=0,b=1)
+
+ggs_traceplot(ggs(stanfit_logr_dornmodif_slope) %>% filter(Parameter == "b"))
+y_fit <- apply(rstan::extract(stanfit_logr_dornmodif_slope)$"y_hat", 2, quantile, probs = .5)
+plot(y_fit, standat_dornmodif_logr$y); abline(a=0,b=1)
+
+ggs_traceplot(ggs(stanfit_slope_dornraw_intslope) %>% filter(Parameter %in% c("a","b")))
+y_fit <- apply(rstan::extract(stanfit_slope_dornraw_intslope)$"y_hat", 2, quantile, probs = .5)
+plot(y_fit, standat_dornraw_slope$y); abline(a=0,b=1)
+
+ggs_traceplot(ggs(stanfit_slope_dornraw_slope) %>% filter(Parameter == "b"))
+y_fit <- apply(rstan::extract(stanfit_slope_dornraw_slope)$"y_hat", 2, quantile, probs = .5)
+plot(y_fit, standat_dornraw_slope$y); abline(a=0,b=1)
 
 # extract credible intervals
 #---------------------------

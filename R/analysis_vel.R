@@ -39,12 +39,23 @@ print(stanfit_velupd_rintslope, pars = c("mu_a","mu_b", "sigma_a","sigma_b", "si
 stanfit_velupd_rslope <- stan_sampling(stanmod_rslope, standat_velupd)
 print(stanfit_velupd_rslope, pars = c("mu_b","sigma_b", "sigma"), digits = 4)
 
-# checking model conversion
-#---------------------------
-select_model <- stanfit_velorig_rintslope     # select one of the previous models
+# checking conversion and model fit
+#---------------------------------
+ggs_traceplot(ggs(stanfit_velorig_rintslope, family = "mu"))
+y_fit <- apply(rstan::extract(stanfit_velorig_rintslope)$"y_hat", 2, quantile, probs = .5)
+plot(y_fit, standat_velorig$y); abline(a=0,b=1)
 
-ggs_traceplot(ggs(select_model, family = "mu"))     # example for intercept and slope
-ggs_compare_partial(ggs(select_model, family = "mu"))
+ggs_traceplot(ggs(stanfit_velorig_rslope, family = "mu"))
+y_fit <- apply(rstan::extract(stanfit_velorig_rslope)$"y_hat", 2, quantile, probs = .5)
+plot(y_fit, standat_velorig$y); abline(a=0,b=1)
+
+ggs_traceplot(ggs(stanfit_velupd_rintslope, family = "mu"))
+y_fit <- apply(rstan::extract(stanfit_velupd_rintslope)$"y_hat", 2, quantile, probs = .5)
+plot(y_fit, standat_velupd$y); abline(a=0,b=1)
+
+ggs_traceplot(ggs(stanfit_velupd_rslope, family = "mu"))
+y_fit <- apply(rstan::extract(stanfit_velupd_rslope)$"y_hat", 2, quantile, probs = .5)
+plot(y_fit, standat_velupd$y); abline(a=0,b=1)
 
 # extract credible intervals
 #---------------------------
