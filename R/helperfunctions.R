@@ -5,11 +5,11 @@
 # Data input functions
 #---------------------
   # data input for Dornelas analyses
-stan_in_dorn <- function(infile, y_variable, duration_variable){
+stan_in_dorn <- function(infile, y_variable){
   y <- infile[,y_variable]
   n <- length(y)
 
-  duration <- infile[,duration_variable]
+  duration <- infile$duration
 
   new_duration <- seq(from=min(duration), to=max(duration), by=1)
   n_pred <- length(new_duration)

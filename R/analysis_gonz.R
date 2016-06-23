@@ -11,23 +11,23 @@ source("R/dataprep.R")
 #---------------
 
 # Linear regression model
-gonz_fit_dor <- lm(log_ratio ~ duration_lr, data = dorn_raw)
+gonz_fit_dor <- lm(log_ratio ~ duration, data = dorn_raw)
 summary(gonz_fit_dor)
 
 # Predictions
-pred <- expand.grid(duration_lr=c(seq(from=min(dorn_raw$duration_lr),to=max(dorn_raw$duration_lr),by=1)),log_ratio=0)
+pred <- expand.grid(duration=c(seq(from=min(dorn_raw$duration),to=max(dorn_raw$duration),by=1)),log_ratio=0)
 matrix <- model.matrix(terms(gonz_fit_dor),data=pred)           #sets up the model matrix
 pred$log_ratio <- matrix %*% coef(gonz_fit_dor)                #this calculates the predictions
 pvar <- diag(matrix %*% tcrossprod(vcov(gonz_fit_dor),matrix))  #this adds the variance
 pred <- data.frame(pred, plo=pred$log_ratio - 2*sqrt(pvar), phi=pred$log_ratio+2*sqrt(pvar))
 
 # Plot the results
-gonzPlot_dorn <- qplot(duration_lr, log_ratio, data=dorn_raw, size=I(2)) +
+gonzPlot_dorn <- qplot(duration, log_ratio, data=dorn_raw, size=I(2)) +
   geom_abline(intercept=0, slope=0, 
               lwd=1, color="black") +
   geom_abline(intercept=coef(gonz_fit_dor)[1], slope=coef(gonz_fit_dor)[2], 
               lwd=1.5, color="blue") +
-  geom_ribbon(data = pred, aes(x = duration_lr, ymin = plo, ymax = phi), alpha = 0.3, fill = "blue") +
+  geom_ribbon(data = pred, aes(x = duration, ymin = plo, ymax = phi), alpha = 0.3, fill = "blue") +
   xlab("\nStudy Duration (years)") +
   ylab("Effect Size: ln(S2/S1)\n") +
   theme_bw(base_size=17) +
