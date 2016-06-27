@@ -195,6 +195,7 @@ grid.arrange(plot_slope_dornraw_intslope, plot_slope_dornraw_slope,
              plot_logr_dornraw_intslope, plot_logr_dornraw_slope, 
              plot_logr_dornmodif_intslope, plot_logr_dornmodif_slope, 
              ncol=2, nrow=3, bottom = textGrob("Study Duration (years)\n", gp=gpar(fontsize=12)), 
-             left = textGrob(expression(paste("\nEffect size (ln(",S[2]/S[1],"))                                                                           Slope")), gp=gpar(fontsize=12), rot = 90, hjust = 0.35))
+             left = textGrob(expression(paste("\nEffect size (ln(",S[2]/S[1],")                                                                              Slope")), 
+                             gp=gpar(fontsize=12), rot = 90, hjust = 0.35))
 dev.off()
 
