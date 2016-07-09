@@ -1,5 +1,5 @@
 # DivChangeResponse
-Analyses for *Vellend et al. Estimates of long-term local biodiversity change stand up to scrutiny*. More information on the data can be found in the main text; the models are explained in the Supplementary Material. In brief, we analysed the effect of duration on diversity changes, using the original and updated data from  Vellend et al. 2013 PNAS and the data from Dornelas et al. 2014 Science. These analyses were performed in response to the concerns raised by *Gonzalez et al. (in press) Estimating local biodiversity change: a critique of papers claiming no net loss of local diversity, Ecology*.
+Analyses for *Vellend et al. Estimates of long-term local biodiversity change stand up to scrutiny* (available at [bioRxiv](http://biorxiv.org/content/early/2016/07/08/062133). More information on the data can be found in the main text; the models are explained in the Supplementary Material. In brief, we analysed the effect of duration on diversity changes, using the original and updated data from  Vellend et al. 2013 PNAS and the data from Dornelas et al. 2014 Science. These analyses were performed in response to the concerns raised by *Gonzalez et al. (in press) Estimating local biodiversity change: a critique of papers claiming no net loss of local diversity, Ecology*.
 
 *version 3 June 2016*
 
