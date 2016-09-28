@@ -13,8 +13,8 @@ source("R/helperfunctions.R")
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
-standat_velorig <- stan_in_vel(vel_orig)
-standat_velupd <- stan_in_vel(vel_upd)
+standat_velorig <- stan_in_vel(vel_orig, lrr = "raw")
+standat_velupd <- stan_in_vel(vel_upd, lrr = "raw")
 
 # Construct the Stan models
 #--------------------------
