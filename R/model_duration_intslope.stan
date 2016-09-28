@@ -14,7 +14,7 @@ transformed parameters {
   vector[n] y_hat;
   
   for (i in 1:n)
-    y_hat[i] <- a + duration[i] * b;
+    y_hat[i] = a + duration[i] * b;
 }
 model {
   a ~ normal(0,10);
@@ -26,5 +26,5 @@ model {
 generated quantities {
   vector[n_pred] y_cre;
 
-  y_cre <- a + new_duration * b;
+  y_cre = a + new_duration * b;
 }

@@ -21,7 +21,7 @@ transformed parameters {
   
   // linear predictor
   for (i in 1:n)
-    y_hat[i] <- a[study[i]] + duration[i] * b[study[i]];
+    y_hat[i] = a[study[i]] + duration[i] * b[study[i]];
 }
 model {
   mu_a ~ normal(0, 1);
@@ -39,5 +39,5 @@ model {
 generated quantities {
   vector[n_pred] y_cre;
 
-  y_cre <- mu_a + mu_b * new_duration;
+  y_cre = mu_a + mu_b * new_duration;
 }
