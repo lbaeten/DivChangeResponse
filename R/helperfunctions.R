@@ -16,9 +16,16 @@ stan_in_dorn <- function(infile, y_variable){
 
   list(n=n, n_pred=n_pred, y=y, duration=duration, new_duration=new_duration)
 }
+
   # data input for Vellend analyses
-stan_in_vel <- function(infile){
-  y <- infile$log_SR_ratio
+stan_in_vel <- function(infile, lrr){
+  if(lrr == "raw"){
+    y <- infile$log_SR_ratio
+  }
+  if(lrr == "decade"){
+    y <- infile$log_SR_ratio/(1/10 * infile$Duration)
+  }
+
   n <- length(y)
   study <- as.numeric(infile$Study_nr)
   n_study <- max(study)
