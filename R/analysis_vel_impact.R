@@ -1,6 +1,6 @@
-#================================================
-# Vellend et al. analysis: all versus impact only
-#================================================
+#=================================================
+# Vellend et al. analysis: impact only data subset
+#=================================================
 
 library(rstan)
 library(ggmcmc)
