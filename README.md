@@ -21,7 +21,7 @@ Analyses for *Vellend et al. Estimates of long-term local biodiversity change st
 - *analysis_gonz.R*: mixed-effects model analysis that was used in the re-analysis of the effect of duration in the Gonzalez et al. paper
 - *analysis_vel.R*: reanalysis of the Vellend et al. original and updated dataset. This script reproduces **Fig. 2** from Vellend et al. Estimates of long-term local biodiversity change stand up to scrutiny
 - *analysis_dor.R*: reanalysis of the Dornelas et al. dataset (with log ratio's and slopes as effect sizes). This script reproduces **Fig. 3** from Vellend et al. Estimates of long-term local biodiversity change stand up to scrutiny
-- *analysis_vel_impact only.R*: Gonzalez et al. eliminated studies classified as “post-disturbance”, “post-fire”, and “cessation of grazing” to analyse a subset of 'impact only' data. This script runs our original (Vellend et al. 2013) analysis on this subset, both for the original and updated dataset.
+- *analysis_vel_impact.R*: Gonzalez et al. eliminated studies classified as “post-disturbance”, “post-fire”, and “cessation of grazing” to analyse a subset of 'impact only' data. This script runs our original (Vellend et al. 2013) analysis on this subset, both for the original and updated dataset.
 
 ### Extra scripts
 - *helperfunctions.R*: some helperfunctions used in the different scripts (e.g. restructuring the data for Stan models)
