@@ -141,6 +141,6 @@ plot_velupd_rslope <- ggplot(vel_upd, aes(Duration, log_SR_ratio)) +
 pdf(file="velPlots.pdf")
 grid.arrange(plot_velorig_rintslope, plot_velorig_rslope, 
              plot_velupd_rintslope, plot_velupd_rslope, 
-             ncol=2, nrow=2, bottom = textGrob("Study Duration (years)\n", gp=gpar(fontsize=12)), 
+             ncol=2, nrow=2, bottom = textGrob("Study duration (years)\n", gp=gpar(fontsize=12)), 
              left = textGrob(expression(paste("\nEffect size (ln(",S[2]/S[1],"))")), gp=gpar(fontsize=12), rot = 90))
 dev.off()
