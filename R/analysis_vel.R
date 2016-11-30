@@ -83,7 +83,10 @@ plot_velorig_rintslope <- ggplot(vel_orig, aes(Duration, log_SR_ratio)) +
   ylim(-2.5, 2.5) +
   xlab(NULL) +
   ylab(NULL) +
-  theme_bw(base_size=12) +  annotate(geom="text", x=140, y=2.4, label="a) Original dataset - with intercept", size = 4)
+  theme_bw(base_size=12) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black")) +
+  annotate(geom="text", x=140, y=2.4, label="a) Original dataset - with intercept", size = 4)
 
 plot_velorig_rslope <- ggplot(vel_orig, aes(Duration, log_SR_ratio)) + 
   geom_point() +
@@ -96,6 +99,8 @@ plot_velorig_rslope <- ggplot(vel_orig, aes(Duration, log_SR_ratio)) +
   xlab(NULL) +
   ylab(NULL) +
   theme_bw(base_size=12) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black")) +
   annotate(geom="text", x=140, y=2.4, label="b) Original dataset - intercept = 0", size = 4)
 
 plot_velupd_rintslope <- ggplot(vel_upd, aes(Duration, log_SR_ratio)) + 
@@ -110,6 +115,8 @@ plot_velupd_rintslope <- ggplot(vel_upd, aes(Duration, log_SR_ratio)) +
   xlab(NULL) +
   ylab(NULL) +
   theme_bw(base_size=12) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+          panel.background = element_blank(), axis.line = element_line(colour = "black")) +
   annotate(geom="text", x=140, y=2.4, label="c) Updated dataset - with intercept", size = 4)
 
 plot_velupd_rslope <- ggplot(vel_upd, aes(Duration, log_SR_ratio)) + 
@@ -125,6 +132,8 @@ plot_velupd_rslope <- ggplot(vel_upd, aes(Duration, log_SR_ratio)) +
   xlab(NULL) +
   ylab(NULL) +
   theme_bw(base_size=12) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black")) +
   theme(legend.justification=c(1,0), legend.position=c(1,0), legend.key = element_blank(),legend.text=element_text(size=12),legend.title=element_text(size=12)) +
   annotate(geom="text", x=140, y=2.4, label="d) Updated dataset - intercept = 0", size = 4)
 
@@ -132,6 +141,6 @@ plot_velupd_rslope <- ggplot(vel_upd, aes(Duration, log_SR_ratio)) +
 pdf(file="velPlots.pdf")
 grid.arrange(plot_velorig_rintslope, plot_velorig_rslope, 
              plot_velupd_rintslope, plot_velupd_rslope, 
-             ncol=2, nrow=2, bottom = textGrob("Study Duration (years)\n", gp=gpar(fontsize=12)), 
+             ncol=2, nrow=2, bottom = textGrob("Study duration (years)\n", gp=gpar(fontsize=12)), 
              left = textGrob(expression(paste("\nEffect size (ln(",S[2]/S[1],"))")), gp=gpar(fontsize=12), rot = 90))
 dev.off()

@@ -112,6 +112,8 @@ plot_slope_dornraw_intslope <- ggplot(dorn_raw, aes(x = duration, y = slope)) +
   xlab(NULL) +
   ylab(NULL) +
   theme_bw(base_size=12) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black")) +
   annotate(geom="text", x=50, y=240, label="a) Original dataset (slopes) - with intercept", size = 3)
 
 plot_slope_dornraw_slope <- ggplot(dorn_raw, aes(duration, slope)) + 
@@ -127,6 +129,8 @@ plot_slope_dornraw_slope <- ggplot(dorn_raw, aes(duration, slope)) +
   xlab(NULL) +
   ylab(NULL) +
   theme_bw(base_size=12) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black")) +
   annotate(geom="text", x=50, y=240, label="b) Original dataset (slopes) - intercept = 0", size = 3)
 
   # Log ratios
@@ -143,6 +147,8 @@ plot_logr_dornraw_intslope <- ggplot(dorn_raw, aes(duration, log_ratio)) +
   xlab(NULL) +
   ylab(NULL) +
   theme_bw(base_size=12) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black")) +
   annotate(geom="text", x=50, y=4.8, label="c) Original dataset (log ratios) - with intercept", size = 3)
 
 plot_logr_dornraw_slope <- ggplot(dorn_raw, aes(duration, log_ratio)) + 
@@ -158,6 +164,8 @@ plot_logr_dornraw_slope <- ggplot(dorn_raw, aes(duration, log_ratio)) +
   xlab(NULL) +
   ylab(NULL) +
   theme_bw(base_size=12) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black")) +
   annotate(geom="text", x=50, y=4.8, label="d) Original dataset (log ratios) - intercept = 0", size = 3)
 
 plot_logr_dornmodif_intslope <- ggplot(dorn_modif, aes(duration, log_ratio)) + 
@@ -173,6 +181,8 @@ plot_logr_dornmodif_intslope <- ggplot(dorn_modif, aes(duration, log_ratio)) +
   xlab(NULL) +
   ylab(NULL) +
   theme_bw(base_size=12) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black")) +
   annotate(geom="text", x=50, y=4.8, label="e) Modified dataset (log ratios) - with intercept", size = 3)
 
 plot_logr_dornmodif_slope <- ggplot(dorn_modif, aes(duration, log_ratio)) + 
@@ -188,13 +198,15 @@ plot_logr_dornmodif_slope <- ggplot(dorn_modif, aes(duration, log_ratio)) +
   xlab(NULL) +
   ylab(NULL) +
   theme_bw(base_size=12) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black")) +
   annotate(geom="text", x=50, y=4.8, label="f) Modified dataset (log ratios) - intercept = 0", size = 3)
 
 pdf(file="dornPlots.pdf", width = 7, height = 10.5)
 grid.arrange(plot_slope_dornraw_intslope, plot_slope_dornraw_slope, 
              plot_logr_dornraw_intslope, plot_logr_dornraw_slope, 
              plot_logr_dornmodif_intslope, plot_logr_dornmodif_slope, 
-             ncol=2, nrow=3, bottom = textGrob("Study Duration (years)\n", gp=gpar(fontsize=12)), 
+             ncol=2, nrow=3, bottom = textGrob("Study duration (years)\n", gp=gpar(fontsize=12)), 
              left = textGrob(expression(paste("\nEffect size (ln(",S[2]/S[1],")                                                                              Slope")), 
                              gp=gpar(fontsize=12), rot = 90, hjust = 0.35))
 dev.off()
